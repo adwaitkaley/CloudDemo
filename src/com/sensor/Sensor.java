@@ -13,10 +13,8 @@ public class Sensor {
 	    
 	    //note a single Random object is reused here
 	    Random randomGenerator = new Random();
-	   // for (int idx = 1; idx <= 10; ++idx){
+	 
 	      int randomInt = randomGenerator.nextInt(100000);
-	      System.out.println("Generated : " + randomInt);
-	    //}	    
 	      
 	    String content = "Sensor_id\tData\n\t\t1\t"+randomInt;
 

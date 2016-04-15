@@ -1,0 +1,8 @@
+*.class
+*.log
+.idea/
+.settings/
+node_modules/
+bin/
+.git/
+bower_components/

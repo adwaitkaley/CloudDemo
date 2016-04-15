@@ -14,7 +14,7 @@ public class DBConnect {
 	
 	
 	public void conect(){
-		jdbcUrl = "jdbc:mysql://sql3.freemysqlhosting.net/sql397168";// + "?user=" + "DB281" + "&password=" + "pankajsingh";
+		jdbcUrl = "jdbc:mysql://DB_CONNECTION";
 			  
 		// Load the JDBC driver
 		try {
@@ -22,7 +22,7 @@ public class DBConnect {
 		    Class.forName("com.mysql.jdbc.Driver");
 		    System.out.println("Driver loaded!");
 		    
-		    conn = DriverManager.getConnection(jdbcUrl,"sql397168","uH2!uF9*");
+		    conn = DriverManager.getConnection(jdbcUrl,"DB_USERNAME","DB_PASSWORD");
 			setupStatement = conn.createStatement();
 			///kYan gayo???
 		} 
@@ -74,12 +74,5 @@ public class DBConnect {
 			return result;
 		}
 	}
-	
-	
-	
-	
-	/*public static void main(String args[]){
-		DBConnect db=new DBConnect();
-		db.conect();
-	}*/
+
 }

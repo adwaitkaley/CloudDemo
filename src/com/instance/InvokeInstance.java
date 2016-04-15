@@ -32,34 +32,24 @@ public class InvokeInstance {
 	
 		// TODO Auto-generated method stub
 		AWSCredentials credentials = new ProfileCredentialsProvider().getCredentials();
-				//new PropertiesCredentials(AwsConsoleApp.class.getResourceAsStream("credentials"));
+			
 
-		AmazonEC2 amazonEC2Client = new AmazonEC2Client(new BasicAWSCredentials("AKIAJHEL4MLCNCDCRJIQ", "cVdp6+T7Z4TCjJHJQk4eXaei8p1Cl/23fS8cSsVO"));
+		AmazonEC2 amazonEC2Client = new AmazonEC2Client(new BasicAWSCredentials("KEY", "VALUE"));
 		
-		//new AmazonEC2Client(new BasicAWSCredentials("AKIAI32NAJBWBXFWKXPQ", "fbQTu9ERdPKdkKFycmnDIgMpQ2ziphaiFIHjXUw6"));
+		
 		
 		amazonEC2Client.setEndpoint("ec2.us-west-2.amazonaws.com");
-		/*List <String>name=new ArrayList<String>();
-		List <String>value=new ArrayList<String>();
-		
-		CreateTagsRequest createTagsRequest=new CreateTagsRequest();
-		
-		amazonEC2Client.createTags(createTagsRequest);
-		*/
-		
+			
 		RunInstancesRequest runInstancesRequest = new RunInstancesRequest();
 			        	
 		
-		runInstancesRequest.withImageId("ami-a6b3a2c7")
+		runInstancesRequest.withImageId("AMI_ID")
 		                   .withInstanceType("t2.micro")
 		                   .withMinCount(1)
 		                   .withMaxCount(1)
-		                   .withKeyName("MobileSensorKey1")
-		                   //.withKeyName("Hello_281")
+		                   .withKeyName("MobileSensorKey1")      
 		                   .withSecurityGroups("launch-wizard-2");
-		                   //.withSecurityGroups("launch-wizard-1");
-		                   //.withSecurityGroups("JavaSecurityGroup");
-		
+		                  
 		
 			  
 		RunInstancesResult runInstancesResult = amazonEC2Client.runInstances(runInstancesRequest);
@@ -72,27 +62,13 @@ public class InvokeInstance {
 		
 		DescribeInstancesResult ires=amazonEC2Client.describeInstances(ir);
 		
-		//	createTagsRequest.withResources(runInstancesResult.getReservation().getInstances().get(0).getInstanceId()).setTags("Name", "TestInstance");
-		//System.out.println(runInstancesResult.toString());
-//		System.out.println("\n"+ires.getReservations().get(1).getInstances().get(0).getPublicIpAddress().toString());
-
-		System.out.println(ires.toString());
-		
-		//ires.getReservations().get(1).getInstances().get(0).getPublicIpAddress().toString();
-		
-		/*ires.getReservations().get(1).getInstances().get(0)
-		getInstances().get(0).getPublicIpAddress().toString();
-		*/
+	
 		InvokeInstance ii = new InvokeInstance();
 		
 		String state=ires.getReservations().get(0).getInstances().get(0).getState().getName().toString();
 		
-		System.out.println("state is: "+state);
 		
 		while(!state.equals("running")){
-			//if(ires.getReservations().get(0).getInstances().get(0).getState().getName().toString()!="pending"){
-				//break;
-			//}
 			ires=amazonEC2Client.describeInstances(ir);
 			state=ires.getReservations().get(0).getInstances().get(0).getState().getName().toString();
 			System.out.println("Running state is: "+state);
@@ -107,11 +83,8 @@ public class InvokeInstance {
 		
 		DBInsert dbi=new DBInsert();
 		
-		//Reservation res=new Reservation();
 		
-		System.out.println("ires = \n"+ires.toString());
 		
-		//System.out.println("res.getinstance"+res.getInstances().toString());
 		
 		while(true){
 			if(ires.getReservations().get(0).getInstances().get(0).getState().getName().toString()!="pending"){
@@ -125,7 +98,7 @@ public class InvokeInstance {
 		dbi.setGroupName(ires.getReservations().get(0).getInstances().get(0).getSecurityGroups().get(0).getGroupName().toString());
 		
 		dbi.setPublicIpAddress(ires.getReservations().get(0).getInstances().get(0).getPublicIpAddress().toString());
-		//.get(0).getPublicIpAddress().toString());
+		
 		
 		dbi.setInstanceId(ires.getReservations().get(0).getInstances().get(0).getInstanceId().toString());
 		
